@@ -27,14 +27,17 @@ class TicketContainer extends StatelessWidget {
 
     return Stack(
       children: <Widget>[
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 15),
-          padding: EdgeInsets.all(25),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(radius * 1.5),
-                topRight: Radius.circular(radius * 1.5)),
+        Hero(
+          tag: movie.title,
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.all(25),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(radius * 1.5),
+                  topRight: Radius.circular(radius * 1.5)),
+            ),
           ),
         ),
         Column(

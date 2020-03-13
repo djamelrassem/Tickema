@@ -36,14 +36,14 @@ class _DescriptionState extends State<Description> {
           child: Hero(
             tag: widget.movie.title,
             child: Container(
-              height: height * 0.7,
+              height: height * 0.8,
               width: width,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50),
                       topRight: Radius.circular(50))),
-              child: Column(),
+             
             ),
           ),
         ),
@@ -66,20 +66,20 @@ class _DescriptionState extends State<Description> {
               tag: 'button'),
         ),
         Align(
-          alignment: Alignment(0, -0.7),
+          alignment: Alignment(0, -0.6),
           child: Hero(
             tag: '${widget.movie.title}5',
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(20)),
               child: Container(
-                  width: 100,
+                  width: 110,
                   child: AspectRatio(
                     aspectRatio: 0.9,
                     child: widget.movie.image,
                   )),
             ),
           ),
-        )
+        ),
       ],
     );
   }

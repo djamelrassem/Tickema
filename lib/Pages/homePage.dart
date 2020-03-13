@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tickema/Data/movieClass.dart';
-import 'package:tickema/Pages/CustomWidgets/description.dart';
+import 'package:tickema/Pages/description.dart';
 import 'package:tickema/Pages/CustomWidgets/reverseScroller.dart';
 import 'package:tickema/Pages/CustomWidgets/ticketContainer.dart';
 
