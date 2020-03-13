@@ -12,7 +12,7 @@ class TicketContainer extends StatelessWidget {
     List<Container> children = [];
     for (String categ in movie.categories) {
       children.add(Container(
-        margin: EdgeInsets.symmetric(horizontal: 1),
+        margin: EdgeInsets.symmetric(horizontal: 5),
         padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
         child: Text(
           categ,
@@ -25,28 +25,34 @@ class TicketContainer extends StatelessWidget {
       ));
     }
 
-    return Container(
-        margin: EdgeInsets.symmetric(horizontal: 15),
-        padding: EdgeInsets.all(25),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius * 1.5),
-              topRight: Radius.circular(radius * 1.5)),
+    return Stack(
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.all(25),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(radius * 1.5),
+                topRight: Radius.circular(radius * 1.5)),
+          ),
         ),
-        child: Column(
+        Column(
           children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(radius)),
-              child: Container(
-                  width: 230,
-                  child: AspectRatio(
-                    aspectRatio: 0.9,
-                    child: Hero(
+            SizedBox(
+              height: 20,
+            ),
+            Hero(
+              tag: '${movie.title}5',
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(radius)),
+                child: Container(
+                    width: 180,
+                    child: AspectRatio(
+                      aspectRatio: 0.9,
                       child: image,
-                      tag: '${movie.title}s',
-                    ),
-                  )),
+                    )),
+              ),
             ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 12),
@@ -56,9 +62,11 @@ class TicketContainer extends StatelessWidget {
               ),
             ),
             Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: children),
           ],
-        ));
+        )
+      ],
+    );
   }
 }

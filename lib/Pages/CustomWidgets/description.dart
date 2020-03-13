@@ -66,8 +66,19 @@ class _DescriptionState extends State<Description> {
               tag: 'button'),
         ),
         Align(
-          alignment: Alignment(0, -0.5),
-          child: Hero(tag:  '${widget.movie.title}5', child: widget.movie.image),
+          alignment: Alignment(0, -0.7),
+          child: Hero(
+            tag: '${widget.movie.title}5',
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              child: Container(
+                  width: 100,
+                  child: AspectRatio(
+                    aspectRatio: 0.9,
+                    child: widget.movie.image,
+                  )),
+            ),
+          ),
         )
       ],
     );

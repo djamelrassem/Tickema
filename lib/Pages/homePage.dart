@@ -19,15 +19,13 @@ class _HomePageState extends State<HomePage> {
       backgrounds.add(new Container(
         child: movie.image,
       ));
-      tickets.add(new Hero(
-        tag: movie.title,
-        child: TicketContainer(
+      tickets.add( TicketContainer(
           image: movie.image,
           radius: 20,
           title: movie.title,
           movie: movie,
         ),
-      ));
+      );
     }
 
     ReversePageScroller scroller = ReversePageScroller(
