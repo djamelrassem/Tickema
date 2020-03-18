@@ -66,15 +66,13 @@ class _ReversePageScrollerState extends State<ReversePageScroller> {
       ),
       Container(
         height: height * widget.percent,
-        child: Hero(
-          tag: "desc",
-          child: PageView.builder(
+        child : PageView.builder(
             controller: widget.frontController,
             itemCount: widget.frontChildren.length,
             itemBuilder: (context, index) =>
                 Container(child: widget.frontChildren[index]),
           ),
-        ),
+       
       )
     ];
     return Stack(alignment: Alignment.bottomCenter, children: children);

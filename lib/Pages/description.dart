@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tickema/Data/movieClass.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class Description extends StatefulWidget {
   Description({this.movie});
@@ -38,7 +39,7 @@ class _DescriptionState extends State<Description> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Hero(
-            tag: "desc",
+            tag: "${widget.movie.title}",
             child: Container(
               height: height * 0.8,
               width: width,
@@ -66,10 +67,10 @@ class _DescriptionState extends State<Description> {
           ),
         ),
         Align(
-            alignment: Alignment(0,-0.3),
+            alignment: Alignment(0, -0.3),
             child: Container(
               height: 100,
-                child:  Hero(
+              child: Hero(
                   tag: '${widget.movie.title}4',
                   child: Material(
                       type: MaterialType.transparency,
@@ -89,6 +90,25 @@ class _DescriptionState extends State<Description> {
                         ],
                       ))),
             )),
+        Align(
+          alignment: Alignment(0,-0.15),
+          child: Hero(
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Material(
+                type: MaterialType.transparency,
+                child: Text(widget.movie.rating.toString()),
+              ),
+              SmoothStarRating(
+                size: 20,
+                spacing: 3,
+                borderColor: Colors.grey,
+                rating: widget.movie.rating / 2,
+                color: Colors.yellow[700],
+              )
+            ]),
+            tag: "${widget.movie.title}rating",
+          ),
+        ),
         Align(
             alignment: Alignment.bottomCenter,
             child: Hero(

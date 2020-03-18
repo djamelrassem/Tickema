@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tickema/Data/movieClass.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class TicketContainer extends StatelessWidget {
   TicketContainer({this.radius, this.image, this.title, this.movie});
@@ -29,14 +30,17 @@ class TicketContainer extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(radius)),
-              child: Container(
-                  width: 180,
-                  child: AspectRatio(
-                    aspectRatio: 0.9,
-                    child: image,
-                  )),
+            Hero(
+              tag: "${movie.title}5",
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(radius)),
+                child: Container(
+                    width: 180,
+                    child: AspectRatio(
+                      aspectRatio: 0.9,
+                      child: image,
+                    )),
+              ),
             ),
             Hero(
                 tag: '${movie.title}4',
@@ -56,7 +60,26 @@ class TicketContainer extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: movie.children)
                       ],
-                    )))
+                    ))),
+            SizedBox(
+              height: 20,
+            ),
+            Hero(
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Material(
+                    type: MaterialType.transparency,
+                    child: Text(movie.rating.toString())),
+                SmoothStarRating(
+                  size: 20,
+                  spacing: 3,
+                  borderColor: Colors.grey,
+                  rating: movie.rating / 2,
+                  color: Colors.yellow[700],
+                )
+              ]),
+              tag: "${movie.title}rating",
+            ),
           ],
         )
       ],

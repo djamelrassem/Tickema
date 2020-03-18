@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(
                   context,
                   PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds :250),
                       pageBuilder: (context, _, __) => Description(
                             movie:
                                 movies[scroller.frontController.page.toInt()],
