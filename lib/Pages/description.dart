@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tickema/Data/movieClass.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:tickema/Pages/pickPlace.dart';
 
 class Description extends StatefulWidget {
   Description({this.movie});
@@ -8,7 +9,48 @@ class Description extends StatefulWidget {
   _DescriptionState createState() => _DescriptionState();
 }
 
-class _DescriptionState extends State<Description> {
+class _DescriptionState extends State<Description>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation widthValue;
+  Animation radiusValue;
+  String buttonText;
+  MaterialColor buttonColor;
+  @override
+  void initState() {
+    buttonColor = Colors.grey;
+    controller = new AnimationController(
+        vsync: this, duration: Duration(milliseconds: 300));
+    widthValue = new Tween(begin: 300.0, end: 50.0).animate(controller);
+    radiusValue = new Tween(begin: 0.0, end: 50.0).animate(controller);
+    buttonText = 'BUY TICKET';
+    widthValue.addListener(() {
+      setState(() {});
+      if (controller.isCompleted) {
+        Navigator.push(
+            context,
+            PageRouteBuilder(
+                transitionDuration: Duration(milliseconds:700),
+                pageBuilder: (context, _, __) => PlacePicker()));
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void clicked() {
+    setState(() {
+      buttonText = '';
+    });
+
+    controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     String actors = '';
@@ -72,108 +114,129 @@ class _DescriptionState extends State<Description> {
               padding: EdgeInsets.all(20),
               width: width,
               height: height * 0.72,
-              child: Column(
-                children: <Widget>[
-                  Hero(
-                      tag: '${widget.movie.title}4',
-                      child: Material(
-                          type: MaterialType.transparency,
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.symmetric(vertical: 12),
-                                child: Text(
-                                  widget.movie.title,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: widget.movie.children),
-                            ],
-                          ))),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Hero(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Material(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Hero(
+                        tag: '${widget.movie.title}4',
+                        child: Material(
                             type: MaterialType.transparency,
-                            child: Text(widget.movie.rating.toString()),
-                          ),
-                          SmoothStarRating(
-                            size: 20,
-                            spacing: 3,
-                            borderColor: Colors.grey,
-                            rating: widget.movie.rating / 2,
-                            color: Colors.yellow[700],
-                          )
-                        ]),
-                    tag: "${widget.movie.title}rating",
-                  ),
-                  Hero(
-                    tag: 'info',
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        RichText(
-                            text: TextSpan(
-                                style: TextStyle(color: Colors.black),
-                                children: [
-                              TextSpan(
-                                  text: 'Actors\n\n',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700),
-                                  children: [
-                                    TextSpan(
-                                        text: actors,
-                                        style: TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400))
-                                  ]),
-                              TextSpan(
-                                  text: '\n\n\nDescription\n\n',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700),
-                                  children: [
-                                    TextSpan(
-                                        text: widget.movie.description,
-                                        style: TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400))
-                                  ])
-                            ])),
-                      ],
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.symmetric(vertical: 12),
+                                  child: Text(
+                                    widget.movie.title,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: widget.movie.children),
+                              ],
+                            ))),
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                ],
+                    Hero(
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Material(
+                              type: MaterialType.transparency,
+                              child: Text(widget.movie.rating.toString()),
+                            ),
+                            SmoothStarRating(
+                              size: 20,
+                              spacing: 3,
+                              borderColor: Colors.grey,
+                              rating: widget.movie.rating / 2,
+                              color: Colors.yellow[700],
+                            )
+                          ]),
+                      tag: "${widget.movie.title}rating",
+                    ),
+                    Hero(
+                      tag: 'info',
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          RichText(
+                              text: TextSpan(
+                                  style: TextStyle(color: Colors.black),
+                                  children: [
+                                TextSpan(
+                                    text: 'Actors\n\n',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700),
+                                    children: [
+                                      TextSpan(
+                                          text: actors,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w400))
+                                    ]),
+                                TextSpan(
+                                    text: '\n\n\nDescription\n\n',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700),
+                                    children: [
+                                      TextSpan(
+                                          text: widget.movie.description,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w400))
+                                    ])
+                              ])),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )),
         Align(
           alignment: Alignment(0, 0.9),
           child: Hero(
+              tag: 'placePicker',
               child: Container(
-                  height: MediaQuery.of(context).size.height * 0.07,
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  color: Colors.grey,
+                height: height * 0.07,
+                width: 50,
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(50))),
+              )),
+        ),
+        Align(
+          alignment: Alignment(0, 0.9),
+          child: GestureDetector(
+            onTap: clicked,
+            child: Hero(
+              tag: 'button',
+              child: Container(
+                  height: height * 0.07,
+                  width: widthValue.value,
+                  decoration: BoxDecoration(
+                      color: buttonColor,
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(radiusValue.value))),
                   child: Center(
                       child: Material(
                     type: MaterialType.transparency,
-                    child: Text('BUY TICKET',
+                    child: Text(buttonText,
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 17)),
                   ))),
-              tag: 'button'),
+            ),
+          ),
         ),
       ],
     );
