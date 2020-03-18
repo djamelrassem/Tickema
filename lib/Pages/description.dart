@@ -66,11 +66,10 @@ class _DescriptionState extends State<Description> {
           ),
         ),
         Align(
-            alignment: Alignment.bottomCenter,
+            alignment: Alignment(0,-0.3),
             child: Container(
-                child: AspectRatio(
-              aspectRatio: 0.9,
-              child: Hero(
+              height: 100,
+                child:  Hero(
                   tag: '${widget.movie.title}4',
                   child: Material(
                       type: MaterialType.transparency,
@@ -89,7 +88,7 @@ class _DescriptionState extends State<Description> {
                               children: widget.movie.children),
                         ],
                       ))),
-            ))),
+            )),
         Align(
             alignment: Alignment.bottomCenter,
             child: Hero(
