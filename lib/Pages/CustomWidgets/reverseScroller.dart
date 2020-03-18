@@ -24,7 +24,7 @@ class ReversePageScroller extends StatefulWidget {
 
 class _ReversePageScrollerState extends State<ReversePageScroller> {
   PageController backgroundController;
-  
+
   @override
   void initState() {
     int length = widget.backgroundChildren.length;
@@ -39,7 +39,8 @@ class _ReversePageScrollerState extends State<ReversePageScroller> {
   Widget build(BuildContext context) {
     widget.frontController.addListener(() {
       backgroundController.position.forcePixels(
-          widget.frontController.position.pixels / widget.frontController.viewportFraction );
+          widget.frontController.position.pixels /
+              widget.frontController.viewportFraction);
     });
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -65,11 +66,14 @@ class _ReversePageScrollerState extends State<ReversePageScroller> {
       ),
       Container(
         height: height * widget.percent,
-        child: PageView.builder(
-          controller: widget.frontController,
-          itemCount: widget.frontChildren.length,
-          itemBuilder: (context, index) =>
-              Container(child: widget.frontChildren[index]),
+        child: Hero(
+          tag: "desc",
+          child: PageView.builder(
+            controller: widget.frontController,
+            itemCount: widget.frontChildren.length,
+            itemBuilder: (context, index) =>
+                Container(child: widget.frontChildren[index]),
+          ),
         ),
       )
     ];

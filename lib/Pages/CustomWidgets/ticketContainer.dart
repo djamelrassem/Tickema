@@ -9,22 +9,6 @@ class TicketContainer extends StatelessWidget {
   final Movie movie;
   @override
   Widget build(BuildContext context) {
-    List<Container> children = [];
-    for (String categ in movie.categories) {
-      children.add(Container(
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-        child: Text(
-          categ,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.grey, fontSize: 12),
-        ),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            border: Border.all(width: 1.0, color: Colors.grey)),
-      ));
-    }
-
     return Stack(
       children: <Widget>[
         Hero(
@@ -45,28 +29,34 @@ class TicketContainer extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
+            ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(radius)),
+              child: Container(
+                  width: 180,
+                  child: AspectRatio(
+                    aspectRatio: 0.9,
+                    child: image,
+                  )),
+            ),
             Hero(
-              tag: '${movie.title}5',
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(radius)),
-                child: Container(
-                    width: 180,
-                    child: AspectRatio(
-                      aspectRatio: 0.9,
-                      child: image,
-                    )),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 12),
-              child: Text(
-                title,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: children),
+                tag: '${movie.title}4',
+                child: Material(
+                    type: MaterialType.transparency,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 12),
+                          child: Text(
+                            title,
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: movie.children)
+                      ],
+                    )))
           ],
         )
       ],

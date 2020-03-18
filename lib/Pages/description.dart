@@ -10,6 +10,10 @@ class Description extends StatefulWidget {
 class _DescriptionState extends State<Description> {
   @override
   Widget build(BuildContext context) {
+    String actors = '';
+    for (String actor in widget.movie.actors) {
+      actors = actor + ' , ' + actors;
+    }
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Stack(
@@ -34,7 +38,7 @@ class _DescriptionState extends State<Description> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Hero(
-            tag: widget.movie.title,
+            tag: "desc",
             child: Container(
               height: height * 0.8,
               width: width,
@@ -43,10 +47,92 @@ class _DescriptionState extends State<Description> {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50),
                       topRight: Radius.circular(50))),
-             
             ),
           ),
         ),
+        Align(
+          alignment: Alignment(0, -0.7),
+          child: Hero(
+            tag: '${widget.movie.title}5',
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              child: Container(
+                  width: 110,
+                  child: AspectRatio(
+                    aspectRatio: 0.9,
+                    child: widget.movie.image,
+                  )),
+            ),
+          ),
+        ),
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+                child: AspectRatio(
+              aspectRatio: 0.9,
+              child: Hero(
+                  tag: '${widget.movie.title}4',
+                  child: Material(
+                      type: MaterialType.transparency,
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 12),
+                            child: Text(
+                              widget.movie.title,
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: widget.movie.children),
+                        ],
+                      ))),
+            ))),
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: Hero(
+              tag: 'info',
+              child: Container(
+                  padding: EdgeInsets.all(20),
+                  width: width,
+                  height: height * 0.57,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      RichText(
+                          text: TextSpan(
+                              style: TextStyle(color: Colors.black),
+                              children: [
+                            TextSpan(
+                                text: 'Actors\n\n',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w700),
+                                children: [
+                                  TextSpan(
+                                      text: actors,
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400))
+                                ]),
+                            TextSpan(
+                                text: '\n\n\nDescription\n\n',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w700),
+                                children: [
+                                  TextSpan(
+                                      text: widget.movie.description,
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400))
+                                ])
+                          ])),
+                    ],
+                  )),
+            )),
         Align(
           alignment: Alignment(0, 0.9),
           child: Hero(
@@ -64,21 +150,6 @@ class _DescriptionState extends State<Description> {
                             fontSize: 17)),
                   ))),
               tag: 'button'),
-        ),
-        Align(
-          alignment: Alignment(0, -0.6),
-          child: Hero(
-            tag: '${widget.movie.title}5',
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              child: Container(
-                  width: 110,
-                  child: AspectRatio(
-                    aspectRatio: 0.9,
-                    child: widget.movie.image,
-                  )),
-            ),
-          ),
         ),
       ],
     );

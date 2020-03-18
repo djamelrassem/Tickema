@@ -19,7 +19,8 @@ class _HomePageState extends State<HomePage> {
       backgrounds.add(new Container(
         child: movie.image,
       ));
-      tickets.add( TicketContainer(
+      tickets.add(
+        TicketContainer(
           image: movie.image,
           radius: 20,
           title: movie.title,
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         body: Stack(
       children: <Widget>[
+        Hero(tag: 'info', child: Container()),
         scroller,
         Align(
           alignment: Alignment(0, 0.9),
