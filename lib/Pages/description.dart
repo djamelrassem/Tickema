@@ -67,90 +67,95 @@ class _DescriptionState extends State<Description> {
           ),
         ),
         Align(
-            alignment: Alignment(0, -0.3),
-            child: Container(
-              height: 100,
-              child: Hero(
-                  tag: '${widget.movie.title}4',
-                  child: Material(
-                      type: MaterialType.transparency,
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 12),
-                            child: Text(
-                              widget.movie.title,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: widget.movie.children),
-                        ],
-                      ))),
-            )),
-        Align(
-          alignment: Alignment(0,-0.15),
-          child: Hero(
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Material(
-                type: MaterialType.transparency,
-                child: Text(widget.movie.rating.toString()),
-              ),
-              SmoothStarRating(
-                size: 20,
-                spacing: 3,
-                borderColor: Colors.grey,
-                rating: widget.movie.rating / 2,
-                color: Colors.yellow[700],
-              )
-            ]),
-            tag: "${widget.movie.title}rating",
-          ),
-        ),
-        Align(
             alignment: Alignment.bottomCenter,
-            child: Hero(
-              tag: 'info',
-              child: Container(
-                  padding: EdgeInsets.all(20),
-                  width: width,
-                  height: height * 0.57,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      RichText(
-                          text: TextSpan(
-                              style: TextStyle(color: Colors.black),
-                              children: [
-                            TextSpan(
-                                text: 'Actors\n\n',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w700),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: width,
+              height: height * 0.72,
+              child: Column(
+                children: <Widget>[
+                  Hero(
+                      tag: '${widget.movie.title}4',
+                      child: Material(
+                          type: MaterialType.transparency,
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 12),
+                                child: Text(
+                                  widget.movie.title,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: widget.movie.children),
+                            ],
+                          ))),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Hero(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Material(
+                            type: MaterialType.transparency,
+                            child: Text(widget.movie.rating.toString()),
+                          ),
+                          SmoothStarRating(
+                            size: 20,
+                            spacing: 3,
+                            borderColor: Colors.grey,
+                            rating: widget.movie.rating / 2,
+                            color: Colors.yellow[700],
+                          )
+                        ]),
+                    tag: "${widget.movie.title}rating",
+                  ),
+                  Hero(
+                    tag: 'info',
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        RichText(
+                            text: TextSpan(
+                                style: TextStyle(color: Colors.black),
                                 children: [
-                                  TextSpan(
-                                      text: actors,
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400))
-                                ]),
-                            TextSpan(
-                                text: '\n\n\nDescription\n\n',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w700),
-                                children: [
-                                  TextSpan(
-                                      text: widget.movie.description,
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400))
-                                ])
-                          ])),
-                    ],
-                  )),
+                              TextSpan(
+                                  text: 'Actors\n\n',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700),
+                                  children: [
+                                    TextSpan(
+                                        text: actors,
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400))
+                                  ]),
+                              TextSpan(
+                                  text: '\n\n\nDescription\n\n',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700),
+                                  children: [
+                                    TextSpan(
+                                        text: widget.movie.description,
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400))
+                                  ])
+                            ])),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             )),
         Align(
           alignment: Alignment(0, 0.9),
